@@ -3,13 +3,13 @@
 // const ddmmyy = moment() // Date type'lar üzerinde ekstra özellikler getiren bir kütüphane. Bu ders için önemli değil.
 //             .format('DD/MM/YYYY') // Tarih formatı
 
-const DD_MM_YYYY = 'DD/MM/YYYY';
+const DD_MM_YYYY = "DD/MM/YYYY";
 const currentDate = moment() // Date type'lar üzerinde ekstra özellikler getiren bir kütüphane. Bu ders için önemli değil.
-            .format(DD_MM_YYYY) // Tarih formatı
+  .format(DD_MM_YYYY); // Tarih formatı
 
 // ====================================================================================================
 
-const user = {name:"mehmet"};
+const user = { name: "mehmet" };
 
 // // a.js
 // getUserName(user);
@@ -28,13 +28,13 @@ const MILISECONDS_IN_A_DAY = 1000 * 60 * 60 * 24;
 // a.js
 // setTimeout(() => {
 //     // İşlem
-// }, 
+// },
 // //86400000
 // 1000 * 60 * 60 * 24
 // );
 
 setTimeout(() => {
-    // İşlem
+  // İşlem
 }, MILISECONDS_IN_A_DAY);
 
 // ====================================================================================================
@@ -78,29 +78,29 @@ const locations = ["Istanbul", "Izmir", "Ankara", "Antalya"];
 //     doStuff(l);
 // });
 
-locations.forEach(location => {
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    // Do something
-    doStuff(location);
+locations.forEach((location) => {
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  // Do something
+  doStuff(location);
 });
 
 // ====================================================================================================
@@ -115,14 +115,13 @@ locations.forEach(location => {
 // }
 // const customerFullName = `${customer.customerName} ${customer.customerSurname}`
 
-
 const customer = {
-    id: 1,
-    name: "Mehmet",
-    surname: "Kara",
-    age: 30,
-}
-const customerFullName = `${customer.name} ${customer.surname}`
+  id: 1,
+  name: "Mehmet",
+  surname: "Kara",
+  age: 30,
+};
+const customerFullName = `${customer.name} ${customer.surname}`;
 
 // Do something
 // Do something
@@ -149,12 +148,12 @@ console.log(customerFullName);
 //     }
 // }
 class Customer {
-    constructor(id, name, surname, age) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-    }
+  constructor(id, name, surname, age) {
+    this.id = id;
+    this.name = name;
+    this.surname = surname;
+    this.age = age;
+  }
 }
 const customerFromClass = new Customer(1, "Mehmet", "Kara", 30);
 customerFromClass.name = "Mehmet";
@@ -169,14 +168,14 @@ customerFromClass.name = "Mehmet";
 //     return fileLogger;
 // }
 
-function createFileLogger(folderPath = "./logs"){
-    const fileLogger = new FileLogger();
-    fileLogger.folderPath = folderPath;
-    return fileLogger;
+function createFileLogger(folderPath = "./logs") {
+  const fileLogger = new FileLogger();
+  fileLogger.folderPath = folderPath;
+  return fileLogger;
 }
 
 // a.js
-createFileLogger()
+createFileLogger();
 
 // ====================================================================================================
 
@@ -187,18 +186,18 @@ createFileLogger()
 //     } else {
 //         jsonFilePath = "./logs/log.json";
 //     }
-    
+
 //     let jsonFilePath = jsonFileName ? `./logs/${jsonFileName}` : "./logs/log.json";
 // }
 
-function createJsonLogger(jsonFileName){
-    // "log.json" betiği bir konfigürasyon dosyasından geliyorsa bu şekilde kullanılabilir.
-    let jsonFilePath = `./logs/${jsonFileName ?? "log.json"}`;
+function createJsonLogger(jsonFileName) {
+  // "log.json" betiği bir konfigürasyon dosyasından geliyorsa bu şekilde kullanılabilir.
+  let jsonFilePath = `./logs/${jsonFileName ?? "log.json"}`;
 }
 
-function createJsonLogger(jsonFileName = "log.json"){
-    // Sabit ise varsayılan parametre değeri geçilebilir.
-    let jsonFilePath = `./logs/${jsonFileName}`;
+function createJsonLogger(jsonFileName = "log.json") {
+  // Sabit ise varsayılan parametre değeri geçilebilir.
+  let jsonFilePath = `./logs/${jsonFileName}`;
 }
 
 // ====================================================================================================
@@ -230,35 +229,51 @@ function createJsonLogger(jsonFileName = "log.json"){
 // }
 
 // Named Parameters
-function createMenu(documentElementId, {title, body, buttonText, buttonColor = 'orange', buttonTextColor = 'black', cancellable}){
-    // Craete menu to innerHTML of element that has documentElementId id.
+function createMenu(
+  documentElementId,
+  {
+    title,
+    body,
+    buttonText,
+    buttonColor = "orange",
+    buttonTextColor = "black",
+    cancellable,
+  }
+) {
+  // Craete menu to innerHTML of element that has documentElementId id.
 }
 createMenu("#sidebar", {
-    buttonText : "Tamam",
-    body : "Menu İçeriği",
-    title : "Menu Başlığı",
-    cancellable : true
-})
+  buttonText: "Tamam",
+  body: "Menu İçeriği",
+  title: "Menu Başlığı",
+  cancellable: true,
+});
 createMenu("#sidebar", {
-    title : "Menu Başlığı",
-    body : "Menu İçeriği",
-    buttonText : "Tamam",
-    buttonColor : "red",
-    cancellable : true
-})
+  title: "Menu Başlığı",
+  body: "Menu İçeriği",
+  buttonText: "Tamam",
+  buttonColor: "red",
+  cancellable: true,
+});
 
 // Named Parameters özelliği olmayan veya havada obje üretemediğimiz dillerde (Örn. Java) bu şekilde kullanılabilir.
-class MenuProperties{
-    constructor(title, body, buttonText, buttonColor, cancellable){
-        this.title = title;
-        this.body = body;
-        this.buttonText = buttonText;
-        this.buttonColor = buttonColor;
-        this.buttonTextColor = isDarkColor(this.buttonColor) ? "white" : "black";
-        this.cancellable = cancellable;
-    }
+class MenuProperties {
+  constructor(title, body, buttonText, buttonColor, cancellable) {
+    this.title = title;
+    this.body = body;
+    this.buttonText = buttonText;
+    this.buttonColor = buttonColor;
+    this.buttonTextColor = isDarkColor(this.buttonColor) ? "white" : "black";
+    this.cancellable = cancellable;
+  }
 }
-const menuProperties = new MenuProperties("Menu Başlığı", "Menu İçeriği", "Tamam", "red", true);
+const menuProperties = new MenuProperties(
+  "Menu Başlığı",
+  "Menu İçeriği",
+  "Tamam",
+  "red",
+  true
+);
 createMenu("#sidebar", menuProperties);
 
 // Angular üzerinde örnek
@@ -279,35 +294,134 @@ createMenu("#sidebar", menuProperties);
 //     }
 // )
 aService.add().subsribe({
-    next: (response)=>{ // Next // Success
-        console.log(response);
-    },
-    completed: ()=>{ // Completed
-        console.log("İşlem tamamlandı.");
-    }
-})
+  next: (response) => {
+    // Next // Success
+    console.log(response);
+  },
+  completed: () => {
+    // Completed
+    console.log("İşlem tamamlandı.");
+  },
+});
 
 // TypeScript üzerinde örnek
 // function createMenuInTypeScript(
-//     documentElementId: string, 
+//     documentElementId: string,
 //     {title, body, buttonText, buttonColor = 'orange', cancellable}
 //         : {title: string, body: string, buttonText: string, buttonColor?: string|null, cancellable: boolean})
 // {
 // }
 
 // interface MenuProperties {
-//     title: string, 
-//     body: string, 
-//     buttonText: string, 
-//     buttonColor?: string|null, 
+//     title: string,
+//     body: string,
+//     buttonText: string,
+//     buttonColor?: string|null,
 //     cancellable: boolean
 // }
 // function createMenuInTypeScript(
-//     documentElementId: string, 
+//     documentElementId: string,
 //     {title, body, buttonText, buttonColor = 'orange', cancellable}: MenuProperties)
 // {
 // }
 
 // ====================================================================================================
 
+class User {
+  constructor(userId, email, active, lastLoggedIn) {
+    this.userId = userId;
+    this.email = email;
+    this.active = active;
+    this.lastLoggedIn = lastLoggedIn;
+  }
+}
+class Customer extends User {
+  constructor(customerId, userId, email, active) {
+    super(userId, email, active);
+    this.customerId = customerId;
+  }
+}
+class Manager extends User {
+  constructor(managerId, userId, email, active) {
+    super(userId, email, active);
+    this.managerId = managerId;
+  }
+}
+// function sendEmailToCustomers(customers, emailContent) {
+//   customers.forEach((customer) => {
+//     if (customer.active) {
+//       const user = HttpClient.get(`/users/getbyid/${customer.userId}`);
+//       const connection = {
+//         host: env.get("host"),
+//         port: env.get("port"),
+//         username: env.get("userName"),
+//         password: env.get("password"),
+//       };
+//       EmailClient.connect(connection);
+//       const emailContent = { subject: "İndirim var koşun", body: emailContent };
+//       EmailClient.sendEmail(user.email, emailContent);
+//       EmailClient.disconnect();
+//     }
+//   });
+// }
+// const onSaleEmailContent = "Şu şu şu üründe indirim var.";
+
+// function sendEmailToManagers(managers, emailContent) {
+//   customers.forEach((customer) => {
+//     if (customer.active) {
+//       const user = HttpClient.get(`/users/getbyid/${customer.userId}`);
+//       const connection = {
+//         host: env.get("host"),
+//         port: env.get("port"),
+//         username: env.get("userName"),
+//         password: env.get("password"),
+//       };
+//       EmailClient.connect(connection);
+//       const emailContent = {
+//         subject: "Genel şirket içi duyuru var koşun",
+//         body: emailContent,
+//       };
+//       EmailClient.sendEmail(user.email, emailContent);
+//       EmailClient.disconnect();
+//     }
+//   });
+// }
+// const generalAnnouncementEmailContent = "Şirket içi duyuru var.";
+
+function sendEmailToUsers(users, { subject, content }) {
+  users.filter(isUserActive).forEach((user) => {
+    const user = getUserById(user);
+    const emailContent = { subject: subject, body: content };
+    sendEmail({ email: user.email, emailContent });
+  });
+}
+
+function isUserActive(user) {
+  return user.active || user.lastLoggedIn > moment().subtract(5, "years");
+}
+
+function getUserById(userId) {
+  return HttpClient.get(`/users/getbyid/${userId}`);
+  // user.id;
+}
+
+function sendEmail({ email, subject, body }) {
+  const configuration = getEmailConfiguration();
+  const connection = EmailClient.connect(configuration);
+  const emailContent = {
+    subject: subject,
+    body: body,
+  };
+  EmailClient.sendEmail(email, emailContent);
+  EmailClient.disconnect();
+}
+
+function getEmailConfiguration() {
+  return {
+    host: env.get("host"),
+    port: env.get("port"),
+    username: env.get("userName"),
+    password: env.get("password"),
+  };
+}
 //#endregion Fonksiyonlar
