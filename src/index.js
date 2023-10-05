@@ -204,3 +204,110 @@ function createJsonLogger(jsonFileName = "log.json"){
 // ====================================================================================================
 
 //#endregion Değişkenler
+
+//#region Fonksiyonlar
+
+// function createMenu(title, body, buttonText, cancellable){
+//     // Do something
+// }
+// createMenu("Menu Başlığı", "Menu İçeriği", "Tamam", true);
+
+// Positinal Parameters
+// function createMenu(title, body, buttonText, buttonColor, cancellable){
+//     // Do something
+// }
+// createMenu("Menu Başlığı", "Menu İçeriği", "Tamam", true); // Bu şekilde kullanıldığında cancellable parametresi undefined olacaktır.
+// createMenu("Menu Başlığı", "Menu İçeriği", "Tamam", null, true); // Bu şekilde kullanıldığında cancellable parametresi undefined olacaktır.
+
+// function createMenu(menuProperties){
+//     // const title = menuProperties.title;
+//     // const body = menuProperties.body;
+//     // const buttonText = menuProperties.buttonText;
+//     // const buttonColor = menuProperties.buttonColor;
+//     // const cancellable = menuProperties.cancellable;
+
+//     const {title, body, buttonText, buttonColor, cancellable} = menuProperties; // Destructuring
+// }
+
+// Named Parameters
+function createMenu(documentElementId, {title, body, buttonText, buttonColor = 'orange', buttonTextColor = 'black', cancellable}){
+    // Craete menu to innerHTML of element that has documentElementId id.
+}
+createMenu("#sidebar", {
+    buttonText : "Tamam",
+    body : "Menu İçeriği",
+    title : "Menu Başlığı",
+    cancellable : true
+})
+createMenu("#sidebar", {
+    title : "Menu Başlığı",
+    body : "Menu İçeriği",
+    buttonText : "Tamam",
+    buttonColor : "red",
+    cancellable : true
+})
+
+// Named Parameters özelliği olmayan veya havada obje üretemediğimiz dillerde (Örn. Java) bu şekilde kullanılabilir.
+class MenuProperties{
+    constructor(title, body, buttonText, buttonColor, cancellable){
+        this.title = title;
+        this.body = body;
+        this.buttonText = buttonText;
+        this.buttonColor = buttonColor;
+        this.buttonTextColor = isDarkColor(this.buttonColor) ? "white" : "black";
+        this.cancellable = cancellable;
+    }
+}
+const menuProperties = new MenuProperties("Menu Başlığı", "Menu İçeriği", "Tamam", "red", true);
+createMenu("#sidebar", menuProperties);
+
+// Angular üzerinde örnek
+// aService.add().subsribe((response)=>{ // Next // Success
+//         console.log(response);
+//     }, (error)=>{ // Error
+//         console.log(error);
+//     },
+//     ()=>{ // Completed
+//         console.log("İşlem tamamlandı.");
+//     }
+// )
+// aService.add().subsribe((response)=>{ // Next // Success
+//     console.log(response);
+//     }, null,
+//     ()=>{ // Completed
+//         console.log("İşlem tamamlandı.");
+//     }
+// )
+aService.add().subsribe({
+    next: (response)=>{ // Next // Success
+        console.log(response);
+    },
+    completed: ()=>{ // Completed
+        console.log("İşlem tamamlandı.");
+    }
+})
+
+// TypeScript üzerinde örnek
+// function createMenuInTypeScript(
+//     documentElementId: string, 
+//     {title, body, buttonText, buttonColor = 'orange', cancellable}
+//         : {title: string, body: string, buttonText: string, buttonColor?: string|null, cancellable: boolean})
+// {
+// }
+
+// interface MenuProperties {
+//     title: string, 
+//     body: string, 
+//     buttonText: string, 
+//     buttonColor?: string|null, 
+//     cancellable: boolean
+// }
+// function createMenuInTypeScript(
+//     documentElementId: string, 
+//     {title, body, buttonText, buttonColor = 'orange', cancellable}: MenuProperties)
+// {
+// }
+
+// ====================================================================================================
+
+//#endregion Fonksiyonlar
