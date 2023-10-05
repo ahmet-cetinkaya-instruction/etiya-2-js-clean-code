@@ -105,7 +105,101 @@ locations.forEach(location => {
 
 // ====================================================================================================
 
+// Değişkenleri kapsayan bir obje yapısı mevcutsa, değişkenlerde o objenin bir özelliğini temsil ediyorsa tekrar objenin ismini değişkenlerde geçirmeye gerek yok.
 
+// const customer = {
+//     customerId: 1,
+//     customerName: "Mehmet",
+//     customerSurname: "Kara",
+//     customerAge: 30,
+// }
+// const customerFullName = `${customer.customerName} ${customer.customerSurname}`
+
+
+const customer = {
+    id: 1,
+    name: "Mehmet",
+    surname: "Kara",
+    age: 30,
+}
+const customerFullName = `${customer.name} ${customer.surname}`
+
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+// Do something
+
+console.log(customerFullName);
+
+// class Customer {
+//     constructor(customerId, customerName, customerSurname, customerAge) {
+//         this.customerId = customerId;
+//         this.customerName = customerName;
+//         this.customerSurname = customerSurname;
+//         this.customerAge = customerAge;
+//     }
+// }
+class Customer {
+    constructor(id, name, surname, age) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+    }
+}
+const customerFromClass = new Customer(1, "Mehmet", "Kara", 30);
+customerFromClass.name = "Mehmet";
+
+// ====================================================================================================
+
+// utils.js
+// function createFileLogger(folderPath){
+//     folderPath = folderPath ?? "./logs";
+//     const fileLogger = new FileLogger();
+//     fileLogger.folderPath = folderPath;
+//     return fileLogger;
+// }
+
+function createFileLogger(folderPath = "./logs"){
+    const fileLogger = new FileLogger();
+    fileLogger.folderPath = folderPath;
+    return fileLogger;
+}
+
+// a.js
+createFileLogger()
+
+// ====================================================================================================
+
+// function createJsonLogger(jsonFileName){
+//     let jsonFilePath;
+//     if(jsonFileName){
+//         jsonFilePath = `./logs/${jsonFileName}`;
+//     } else {
+//         jsonFilePath = "./logs/log.json";
+//     }
+    
+//     let jsonFilePath = jsonFileName ? `./logs/${jsonFileName}` : "./logs/log.json";
+// }
+
+function createJsonLogger(jsonFileName){
+    // "log.json" betiği bir konfigürasyon dosyasından geliyorsa bu şekilde kullanılabilir.
+    let jsonFilePath = `./logs/${jsonFileName ?? "log.json"}`;
+}
+
+function createJsonLogger(jsonFileName = "log.json"){
+    // Sabit ise varsayılan parametre değeri geçilebilir.
+    let jsonFilePath = `./logs/${jsonFileName}`;
+}
 
 // ====================================================================================================
 
