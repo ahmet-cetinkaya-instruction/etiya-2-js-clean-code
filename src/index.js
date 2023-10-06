@@ -48,6 +48,7 @@ const cityZipCodeRegex = /,\s*[^,]+\s*(\d{5})$/;
 //     address.match(cityZipCodeRegex)[1]
 // );
 const [_, zipCode] = address.match(cityZipCodeRegex); // Destructuring
+// const zipCode = address.match(cityZipCodeRegex)[1];
 saveCityZipCode(zipCode);
 
 // ====================================================================================================
@@ -267,16 +268,24 @@ class MenuProperties {
     this.cancellable = cancellable;
   }
 }
+
+const menuTitle = "Menu Başlığı";
+const menuBody = "Menu İçeriği";
+const menuButtonText = "Tamam";
+const menuButtonColor = "red";
+const menuCancellable = true;
 const menuProperties = new MenuProperties(
-  "Menu Başlığı",
-  "Menu İçeriği",
-  "Tamam",
-  "red",
-  true
+  menuTitle,
+  menuBody,
+  menuButtonText,
+  menuButtonColor,
+  menuCancellable
 );
 createMenu("#sidebar", menuProperties);
 
 // Angular üzerinde örnek
+
+// Deprecated
 // aService.add().subsribe((response)=>{ // Next // Success
 //         console.log(response);
 //     }, (error)=>{ // Error
@@ -285,7 +294,8 @@ createMenu("#sidebar", menuProperties);
 //     ()=>{ // Completed
 //         console.log("İşlem tamamlandı.");
 //     }
-// )
+// ) 
+
 // aService.add().subsribe((response)=>{ // Next // Success
 //     console.log(response);
 //     }, null,
@@ -293,6 +303,8 @@ createMenu("#sidebar", menuProperties);
 //         console.log("İşlem tamamlandı.");
 //     }
 // )
+
+// New
 aService.add().subsribe({
   next: (response) => {
     // Next // Success
@@ -390,7 +402,7 @@ class Manager extends User {
 
 function sendEmailToUsers(users, { subject, content }) {
   users.filter(isUserActive).forEach((user) => {
-    const user = getUserById(user);
+    const user = getUserById(user.id);
     const emailContent = { subject: subject, body: content };
     sendEmail({ email: user.email, emailContent });
   });
@@ -407,7 +419,7 @@ function getUserById(userId) {
 
 function sendEmail({ email, subject, body }) {
   const configuration = getEmailConfiguration();
-  const connection = EmailClient.connect(configuration);
+  EmailClient.connect(configuration);
   const emailContent = {
     subject: subject,
     body: body,
@@ -424,4 +436,9 @@ function getEmailConfiguration() {
     password: env.get("password"),
   };
 }
+
+// ====================================================================================================
+
+
+
 //#endregion Fonksiyonlar
