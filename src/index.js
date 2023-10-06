@@ -556,4 +556,311 @@ console.log(user.getUserId());
 console.log(user.getEmail());
 // user.setUserId(2);
 
+// ====================================================================================================
+
+// Fluent
+// "String".toLowerCase().replace("s", "S").toUpperCase().trim();
+
+class Car {
+  constructor(){
+  }
+
+  constructor(brand, model, color){
+    this.__brand = brand;
+    this.__model = model;
+    this.__color = color;
+  }
+
+  getBrand(){
+    return this.__brand;
+  }
+  setBrand(value){
+    this.__brand = value;
+
+    return this;
+  }
+
+  getModel(){
+    return this.__model;
+  }
+  setModel(value){
+    this.__model = value;
+
+    return this;
+  }
+
+  getColor(){
+    return this.__color;
+  }
+  setColor(value){
+    this.__color = value;
+    
+    return this;
+  }
+  
+  save() {
+    console.log("Saved.", this.__brand, this.__model, this.__color);
+
+    return { delete: this.delete, cache: this.cache };
+  }
+
+  cache(){
+    console.log("Cached.", this.__brand, this.__model, this.__color);
+
+    return this;
+  }
+
+  delete(){
+    console.log("Deleted.", this.__brand, this.__model, this.__color);
+
+    return { revert: this.revert };
+  }
+
+  revert(){
+    console.log("Reverted.", this.__brand, this.__model, this.__color);
+
+    return this;
+  }
+}
+
+// const carBrand = "BMW",
+//   carModel = "3.20i",
+//   carColor = "Blue";
+// const car = new Car(carBrand, carModel, carColor);
+
+const car = new Car();
+const cacheFunction = car.setBrand("BMW")
+                         .setModel("3.20i")
+                         .setColor("Blue")
+                         .save()
+                         .cache();
+
 //#endregion Nesneler ve Veri Yapıları
+
+
+
+//#region SOLID
+
+//# Tek Sorumluluk Prensibi - Single Responsibility Principle
+// 402. satırdaki "sendEmailToUsers" fonksiyonu ve beraberinde üretilen fonkisyonlar buna örnek gösterilebilir.
+
+//# Açık Kapalı Prensibi - Open Closed Principle
+// class Adapter {
+//   constructor(){}
+// }
+
+// class AjaxAdapter extends Adapter {
+//   constructor() {
+//     super();
+//     this.__name = "Ajax Adapter";
+//   }
+
+//   getName(){
+//     return this.__name;
+//   }
+// }
+
+// class NodeAdapter extends Adapter {
+//   constructor() {
+//     super();
+//     this.__name = "Node Adapter";
+//   }
+
+//   getName(){
+//     return this.__name;
+//   }
+// }
+
+// class AxiosAdapter extends Adapter { // Yeni bir adapter eklemek istediğimizde, mevcut kodlara dokunmamamız gerekir.
+//   constructor() {
+//     super();
+//     this.__name = "Axios Adapter";
+//   }
+
+//   getName(){
+//     return this.__name;
+//   }
+// }
+
+// class HttpClient {
+//   constructor(adapter){
+//     this.__adapter = adapter;
+//   }
+  
+//   fetch(url){
+//     if(this.__adapter.getName() == "Ajax Adapter"){
+//       console.log("Ajax ile istek atıldı.");
+//     } else if(this.__adapter.getName() == "Node Adapter"){
+//       console.log("Node ile istek atıldı.");
+//     } else if(this.__adapter.getName() == "Axios Adapter"){ // Bu noktada değişiklik yapmamız gerekiyor.
+//       console.log("Axios ile istek atıldı.");
+//     }
+//   }
+// }
+
+class HttpAdapter {
+  constructor(name){
+    this.__name = name;
+    establishConnection();
+  }
+
+  getName(){
+    return this.__name;
+  }
+
+  establishConnection(){
+    console.log("Connection established.");
+  }
+
+  sendGetRequest(url) {
+    throw new Error("Not implemented.");
+  }
+}
+
+class AjaxAdapter extends HttpAdapter {
+  constructor() {
+    const name = "Ajax Adapter";
+    super(name);
+  }
+
+  sendGetRequest(url){ // Overriding
+    console.log("Ajax ile istek atıldı.", url);
+  }
+}
+
+class NodeAdapter extends HttpAdapter {
+  constructor() {
+    const name = "Node Adapter";
+    super(name);
+  }
+
+  sendGetRequest(url){ // Overriding
+    console.log("Node ile istek atıldı.", url);
+  }
+}
+
+class AxiosAdapter extends HttpAdapter {
+  constructor() {
+    const name = "Axios Adapter";
+    super(name);
+  }
+
+  sendGetRequest(url){ // Overriding
+    console.log("Axios ile istek atıldı.", url);
+  }
+}
+
+class HttpClient {
+  constructor(httpAdapter){
+    this.__httpAdapter = httpAdapter;
+  }
+  
+  fetch(url){
+    return this.__httpAdapter.sendGetRequest(url);
+  }
+}
+
+// inversionOfControl.js
+const httpAdapter = new AxiosAdapter();
+
+// a.js
+const httpClient = new HttpClient(httpAdapter);
+httpClient.fetch("https://www.google.com");
+
+//# Liskov Ayrım Prensibi - Liskov Substitution Principle
+class User {
+  constructor(userId, email, active, lastLoggedIn) {
+    this.__userId = userId;
+    this.__email = email;
+    this.__active = active;
+    this.__lastLoggedIn = lastLoggedIn;
+  }
+}
+
+class Customer extends User {
+  constructor(userId, email, active, customerId) {
+    super(userId, email, active);
+    this.__customerId = customerId;
+  }
+}
+
+class IndividualCustomer extends Customer {
+  constructor(userId, email, active, customerId, firstName, lastName, nationalIdentityNumber) {
+    super(userId, email, active, customerId);
+    this.__firstName = firstName;
+    this.__lastName = lastName;
+    this.__nationalIdentityNumber = nationalIdentityNumber;
+  }
+}
+
+class CorparateCustomer extends Customer {
+  constructor(userId, email, active, customerId, companyName, taxNumber) {
+    super(userId, email, active, customerId);
+    this.__companyName = companyName;
+    this.__taxNumber = taxNumber;
+  }
+}
+
+class Manager extends User {
+  constructor(managerId, userId, email, active) {
+    super(userId, email, active);
+    this.managerId = managerId;
+  }
+}
+
+// Arayüzlerin Ayrımı Prensibi - Interface Segratation Principle
+// Angular üzerinde örnek
+interface OnInit {
+  ngOnInit(): void;
+}
+interface OnChanges {
+  ngOnChanges(): void;
+}
+interface OnDestroy {
+  isDestroyed: boolean; // Daha sonra eklenen bir özellik.
+
+  ngOnDestroy(): void;
+}
+class SideBarMenuComponent implements OnInit, OnChanges, OnDestroy {
+  isDestroyed: boolean;
+
+  ngOnInit(){
+  }
+
+  ngOnChanges(){
+  }
+
+  ngOnDestroy(){
+  }
+}
+
+class NavigationBarMenuComponent implements OnInit, OnChanges, OnDestroy {
+  isDestroyed: boolean;
+
+  ngOnInit(){
+  }
+
+  ngOnChanges(){
+  }
+
+  ngOnDestroy(){
+  }
+}
+
+function checkIfComponentsIsDestroyed(requestedToDestoryComponents: OnDestroy[]){
+  requestedToDestoryComponents.forEach(component => {
+    if(!component.isDestroyed)
+      component.ngOnDestroy();
+  });
+}
+
+const requestedToDestoryComponent1 : OnDestroy = new SideBarMenuComponent();
+const requestedToDestoryComponent2 : OnDestroy = new NavigationBarMenuComponent();
+
+const requestedToDestoryComponents : OnDestroy[] = [requestedToDestoryComponent1, requestedToDestoryComponent2];
+checkIfComponentsIsDestroyed(requestedToDestoryComponents);
+
+// Bağlılığı Tersine Çevirme Pensibi - Dependency Inversion Principle
+// 754. satırda consturtor üzerinden farklı tip referansları enejkte edebiliriz, bakınız: 767. satır.
+
+//#endregion SOLID
