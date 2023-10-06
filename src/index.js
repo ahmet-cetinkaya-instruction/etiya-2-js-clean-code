@@ -9,16 +9,15 @@ const currentDate = moment() // Date type'lar üzerinde ekstra özellikler getir
 
 // ====================================================================================================
 
-const user = { name: "mehmet" };
+// const user = { name: "mehmet" };
 
 // // a.js
-// getUserName(user);
-
+// // getUserName(user);
 // // b.js
-// getClientName(user);
+// // getClientName(user);
 
-// a.js b.js
-getUserName(user);
+// // a.js b.js
+// getUserName(user);
 
 // ====================================================================================================
 
@@ -339,26 +338,26 @@ aService.add().subsribe({
 
 // ====================================================================================================
 
-class User {
-  constructor(userId, email, active, lastLoggedIn) {
-    this.userId = userId;
-    this.email = email;
-    this.active = active;
-    this.lastLoggedIn = lastLoggedIn;
-  }
-}
-class Customer extends User {
-  constructor(customerId, userId, email, active) {
-    super(userId, email, active);
-    this.customerId = customerId;
-  }
-}
-class Manager extends User {
-  constructor(managerId, userId, email, active) {
-    super(userId, email, active);
-    this.managerId = managerId;
-  }
-}
+// class User {
+//   constructor(userId, email, active, lastLoggedIn) {
+//     this.userId = userId;
+//     this.email = email;
+//     this.active = active;
+//     this.lastLoggedIn = lastLoggedIn;
+//   }
+// }
+// class Customer extends User {
+//   constructor(customerId, userId, email, active) {
+//     super(userId, email, active);
+//     this.customerId = customerId;
+//   }
+// }
+// class Manager extends User {
+//   constructor(managerId, userId, email, active) {
+//     super(userId, email, active);
+//     this.managerId = managerId;
+//   }
+// }
 // function sendEmailToCustomers(customers, emailContent) {
 //   customers.forEach((customer) => {
 //     if (customer.active) {
@@ -408,7 +407,8 @@ function sendEmailToUsers(users, { subject, content }) {
   });
 }
 
-function isUserActive(user) { // Her zaman pozitif ifade içeren ve yaklaşımı sergileyen fonksiyonlar hazırlayın.
+function isUserActive(user) {
+  // Her zaman pozitif ifade içeren ve yaklaşımı sergileyen fonksiyonlar hazırlayın.
   return user.active || user.lastLoggedIn > moment().subtract(5, "years");
 }
 
@@ -443,12 +443,15 @@ function getEmailConfiguration() {
 //   return !user.active || user.lastLoggedIn < moment().subtract(5, "years");
 // }
 
-function isUserActive(user) { // Her zaman pozitif ifade içeren ve yaklaşımı sergileyen fonksiyonlar hazırlayın.
+function isUserActive(user) {
+  // Her zaman pozitif ifade içeren ve yaklaşımı sergileyen fonksiyonlar hazırlayın.
   return user.active || user.lastLoggedIn > moment().subtract(5, "years");
 }
 
-if (isUserActive(user)) {}
-if (!isUserActive(user)) {}
+if (isUserActive(user)) {
+}
+if (!isUserActive(user)) {
+}
 
 // ====================================================================================================
 
@@ -499,5 +502,58 @@ console.log(upperCaseLetters); // ["A","B"]
 
 // ====================================================================================================
 
-
 //#endregion Fonksiyonlar
+
+//#region Nesneler ve Veri Yapıları
+
+class User {
+  constructor(userId, email) {
+    this.__userId = userId;
+    this.__email = email;
+  }
+
+  // get userId() {
+  //   return this.__userId;
+  // }
+  getUserId() {
+    return this.__userId;
+  }
+
+  // set userId(value) {
+  //   this.__userId = value;
+  // }
+  // setUserId(value) {
+  //   this.__userId = value;
+  // }
+
+  getEmail() {
+    // Ek işlemler yapılabilir. Logging, Caching vb.
+    return this.__email;
+  }
+
+  setEmail(value) {
+    // Validation ve ek işlemler yapılabilir. Logging, Caching vb.
+    if (!value) throw new Error("Email boş olamaz.");
+    if (isEmailValid(value)) throw new Error("Email geçerli değil.");
+
+    this.__email = value;
+  }
+}
+
+function isEmailValid(email) {
+  const emailRegex = /\S+@\S+\.\S+/;
+  return emailRegex.test(email);
+}
+
+const userId = 1;
+const email = "example@email.com";
+const user = new User(userId, email);
+user.setEmail("example2email.com");
+
+// user.userId = 2;
+// user.getUserId();
+console.log(user.getUserId());
+console.log(user.getEmail());
+// user.setUserId(2);
+
+//#endregion Nesneler ve Veri Yapıları
