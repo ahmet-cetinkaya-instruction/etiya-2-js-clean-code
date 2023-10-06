@@ -294,7 +294,7 @@ createMenu("#sidebar", menuProperties);
 //     ()=>{ // Completed
 //         console.log("İşlem tamamlandı.");
 //     }
-// ) 
+// )
 
 // aService.add().subsribe((response)=>{ // Next // Success
 //     console.log(response);
@@ -408,7 +408,7 @@ function sendEmailToUsers(users, { subject, content }) {
   });
 }
 
-function isUserActive(user) {
+function isUserActive(user) { // Her zaman pozitif ifade içeren ve yaklaşımı sergileyen fonksiyonlar hazırlayın.
   return user.active || user.lastLoggedIn > moment().subtract(5, "years");
 }
 
@@ -439,6 +439,65 @@ function getEmailConfiguration() {
 
 // ====================================================================================================
 
+// function isUserInactive(user) { // Negatif ifadelerden kaçının.
+//   return !user.active || user.lastLoggedIn < moment().subtract(5, "years");
+// }
+
+function isUserActive(user) { // Her zaman pozitif ifade içeren ve yaklaşımı sergileyen fonksiyonlar hazırlayın.
+  return user.active || user.lastLoggedIn > moment().subtract(5, "years");
+}
+
+if (isUserActive(user)) {}
+if (!isUserActive(user)) {}
+
+// ====================================================================================================
+
+const nameInput = "Ahmet Çetinkaya";
+
+// function convertToLastName(){
+//   nameInput = nameInput.split(" ")[1]; // Fonksiyon içerisinde yapılan işlemlerler, kapsam (scope) dışına çıkmaması, etkilememesi gerekir.
+// }
+
+// convertToLastName();
+// //...
+// console.log(`Hoşgeldin ${nameInput}`);
+
+function splitToFirstNameAndLastName(nameInput) {
+  // nameInput = name.toUpperCase(); // Parameterleri fonksiyon içerisinde hiçbir zaman set etmememiz gerekir.
+  const nameInputUpperCase = nameInput.toUpperCase(); // Yeni değişkende yeni değeri veya yeni referansı!!! tutmamız gerekir.
+  return nameInputUpperCase.split(" ");
+}
+const [firstName, lastName] = splitToFirstNameAndLastName(nameInput);
+
+// JavaScript üzerinde var olan örnek
+const letters = ["a", "b"];
+
+// const upperCaseLetters = [];
+// for (let i = 0; i < letters.length; i++) {
+//   const item = letters[i];
+//   const newItem = item.toUpperCase();
+//   upperCaseLetters.push(newItem);
+// } // Hard code yazmak yerine built-in metotları kullanın.
+const upperCaseLetters = letters.map((item) => item.toUpperCase()); // Yeni üretilen değerler her zaman yeni değişkenlerde tutulmalıdır.
+
+console.log(letters); // ["a","b"]
+console.log(upperCaseLetters); // ["A","B"]
+
+// JS'de bulunan map fonksiyonunu kendimiz yazsaydık:
+// function mapCustom(
+//   array, // 0x0001
+//   callBack
+// ) {
+//   const newArray = []; // 0x0002 // Bir referans değerinden üretilen yeni değerler her zaman yeni referans oluşturulup tutulmalıdır.
+//   for (let i = 0; i < array.length; i++) {
+//     const itemValue = array[i];
+//     const newItemValue = callBack(itemValue);
+//     newArray.push(newItemValue);
+//   }
+//   return newArray; // 0x0002
+// }
+
+// ====================================================================================================
 
 
 //#endregion Fonksiyonlar
